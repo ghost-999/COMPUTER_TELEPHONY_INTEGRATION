@@ -1,0 +1,70 @@
+DePaul CTI Data Set
+===================
+ 
+This data set contains the preprocessed and filtered sessionized data 
+for the main DePaul CTI Web server (http://www.cs.depaul.edu). The 
+data is based on a random sample of users visiting this site for a 2 
+week period during April of 2002. The original (unfiltered) data
+contained a total of 20950 sessions from 5446 users. The filtered data
+files were produced by filtering low support pageviews, and eliminating
+sessions of size 1. The filtered data contains 13745 sessions and 683
+pageviews.
+
+DETAILED DESCRIPTIONS OF DATA FILES
+===================================
+
+cti.cod
+-------
+This file contains the list of the pageview in the filtered data set
+along with a pageview id (between 0 and 682). The pageview ids
+corresponds to the columns in the file "cti.std" which contains the
+session data in a standard spreadsheet format (see below).
+
+cti.tra
+-------
+This file contains the filtered sessionized data in transaction format.
+Each line in this file corresponds to the sequence of pages visited 
+during one session. Note that there is a direct correspondence between
+the rows in this file and the rows in the file "cti.std". While the 
+order of occurrence of pageview in each session represents the order in
+which these pageviews were visited, the transactions do not contain
+repeated visited to the same pageview in the same session. Thus, only
+the first access to a pageview is recorded as part of the transaction.
+
+cti.std
+-------
+This file contains the filtered sessionized data in a standard 
+spreadsheet format. The file represents a session-pageview matrix where 
+each column is a pageview (columns correspond to the pageview ids in the
+file "cti.cod") and each row is a session represented as a vector.
+The entries in the table correspond to the amount of time (in seconds)
+spent on pageviews during a given session. The pageview durations were
+maxed out at 999 seconds. For each session, the pageview duration of
+the last pageview in that session, was estimated to be the average
+duration of that pageview across all sessions (in which the pageview
+does not occur as the exit page).
+
+cti-stats.txt
+-------------
+This file contains statistical information about the original
+(unfiltered) data set, including general statistics on the total
+number of users and sessions, as well as statistics on all pageviews
+occurring in the data. Pageview statistics include the support
+(percentage of sessions in which the page view occurs), session
+count, and average duration.
+
+cti.nav
+-------
+This file contains the full (unfiltered) preprocessed sessionized
+data. Each session in begins with a line of the form:
+
+SESSION #n  (USER_ID = k)
+
+where n in the session number, and k is the user id. There may be
+multiple consecutive sessions corresponding to the same user id (repeat
+users). Each sessions ends with a "dashed line". Within a given
+session, each line corresponds to one pageview access. Each line in a 
+session is a tab delimited sequence of 3 fields: time stamp, pageview 
+accessed, and the referrer. The time stamp represents the number of 
+seconds relative to January 1, 2002.
+
